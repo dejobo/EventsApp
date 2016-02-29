@@ -1,0 +1,38 @@
+﻿<section class="mainbar" data-ng-controller="eventEdit as vm">
+    <section class="matter">
+        <div class="container-fluid">
+            <div class="row">
+                <form>
+                    <div class="col-md-6">
+                        <span ng-bind="vm.title"></span>
+
+                        <div class="form-group">
+                            <label for="title">Title</label>
+                            <input type="text" class="form-control" id="title" placeholder="Title" maxlength="64" ng-model="vm.event.title" required autofocus>
+                        </div>
+                        <div class="form-group">
+                            <label for="time">Time</label>
+                            <input type="text" id="time" placeholder="Time" datepicker is-open="false" ng-model="vm.event.time" required>
+                        </div>
+                        <div class="form-group">
+                            <label for="location">Location</label>
+                            <input type="text" class="form-control" id="location" placeholder="Location" maxlength="128" ng-model="vm.event.location">
+                        </div>
+                        <button type="submit" class="btn btn-success" ng-click="vm.save(vm.event)"> Save </button>
+                        <a class="btn btn-danger" href="#/events">Cancel</a>
+                    </div>
+                    <div class="col-md-6">
+                        Attendees
+                        <ul class="list-group">
+                            <li ng-repeat="user in vm.users" class="list-group-item">
+                                <input type="checkbox" ng-model="user.isSelected" />
+                                {{user.name}}
+                            </li>
+                        </ul>
+
+                    </div>
+                </form>
+            </div>
+        </div>
+    </section>
+</section>

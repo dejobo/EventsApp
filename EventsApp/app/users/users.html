@@ -1,0 +1,33 @@
+﻿<section class="mainbar" data-ng-controller="users as vm">
+    <section class="matter">
+        <div class="container-fluid">
+            <div class="row">
+                <div class="widget wblue">
+                    
+                    <div class="widget-content user">
+                        <table class="table">
+                            <thead>
+                            <tr>
+                                <th>Name</th>
+                                <th>Email</th>
+                                <th>Age</th>
+                                <th>Events</th>
+                                <th></th>
+                            </tr>
+                            </thead>
+                            <tbody ng-repeat="user in vm.users">
+                            <tr>
+                                <td>{{user.name}}</td>
+                                <td>{{user.email}}</td>
+                                <td>{{user.age}}</td>
+                                <td>{{user.events.length}}</td>
+                                <th><a class="btn btn-default" href="#/users/{{user.id}}">View Profile</a></th>
+                            </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+</section>
