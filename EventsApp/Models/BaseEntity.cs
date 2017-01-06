@@ -1,4 +1,5 @@
-﻿using System.ComponentModel.DataAnnotations;
+﻿using System;
+using System.ComponentModel.DataAnnotations;
 
 namespace EventsApp.Models
 {
@@ -8,5 +9,11 @@ namespace EventsApp.Models
         public int Id { get; set; }
 
         //Add Audit fields here
+        public DateTime Created { get; set; }
+
+        public BaseEntity()
+        {
+            Created = DateTime.Now;
+        }
     }
 }

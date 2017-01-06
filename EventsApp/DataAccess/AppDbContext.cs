@@ -27,7 +27,9 @@ namespace EventsApp.Models
 
         public DbSet<User> Users { get; set; }
         public DbSet<Event> Events { get; set; }
-       
+        public DbSet<Session> Sessions { get; set; }
+        //public DbSet<EventUsers> EventUsers { get; set; }
+
 
         public void SetModified(object entity)
         {

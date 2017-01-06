@@ -4,6 +4,7 @@ using System.Linq;
 using System.Net;
 using System.Net.Http;
 using System.Web.Http;
+using System.Web.Http.Description;
 using System.Web.Routing;
 using EventsApp.Models;
 
@@ -56,6 +57,7 @@ namespace EventsApp.Controllers
         }
 
         [Route("api/events/{eventId}/users")]
+        [ResponseType(typeof(User))]
         public IHttpActionResult GetEventUsers(int eventId)
         {
             var @event = Context.Events.Find(eventId);

@@ -53,6 +53,10 @@
       <HintPath>..\packages\Microsoft.Owin.3.0.0\lib\net45\Microsoft.Owin.dll</HintPath>
       <Private>True</Private>
     </Reference>
+    <Reference Include="Microsoft.Web.Infrastructure, Version=1.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <HintPath>..\packages\Microsoft.Web.Infrastructure.1.0.0.0\lib\net40\Microsoft.Web.Infrastructure.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
     <Reference Include="Newtonsoft.Json, Version=7.0.0.0, Culture=neutral, PublicKeyToken=30ad4fe6b2a6aeed, processorArchitecture=MSIL">
       <HintPath>..\packages\Newtonsoft.Json.7.0.1\lib\net45\Newtonsoft.Json.dll</HintPath>
       <Private>True</Private>
@@ -63,6 +67,10 @@
     </Reference>
     <Reference Include="OwinWebApiJsonSerializer, Version=1.0.0.0, Culture=neutral, processorArchitecture=MSIL">
       <HintPath>..\packages\OwinWebApiJsonSerializer.1.0.2\lib\net451\OwinWebApiJsonSerializer.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="Swashbuckle.Core, Version=1.0.0.0, Culture=neutral, PublicKeyToken=cd1bb07a5ac7c7bc, processorArchitecture=MSIL">
+      <HintPath>..\packages\Swashbuckle.Core.5.5.3\lib\net40\Swashbuckle.Core.dll</HintPath>
       <Private>True</Private>
     </Reference>
     <Reference Include="System.Data.DataSetExtensions" />
@@ -97,6 +105,10 @@
     <Reference Include="System.Web.Services" />
     <Reference Include="System.EnterpriseServices" />
     <Reference Include="System.Xml.Linq" />
+    <Reference Include="WebActivatorEx, Version=2.0.0.0, Culture=neutral, PublicKeyToken=7b26dc2a43f6a0d4, processorArchitecture=MSIL">
+      <HintPath>..\packages\WebActivatorEx.2.0\lib\net40\WebActivatorEx.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
   </ItemGroup>
   <ItemGroup>
     <Content Include="app\app.js" />
@@ -166,6 +178,7 @@
     <Content Include="Scripts\bootstrap.js" />
     <Content Include="Scripts\bootstrap.min.js" />
     <Content Include="app\users\users.module.js" />
+    <None Include="Properties\PublishProfiles\EventAngularApp - Web Deploy.pubxml" />
     <None Include="Scripts\jquery-2.1.1-vsdoc.js" />
     <Content Include="Scripts\jquery-2.1.1.js" />
     <Content Include="Scripts\jquery-2.1.1.min.js" />
@@ -179,20 +192,52 @@
     <Content Include="Scripts\toastr.min.js" />
     <Content Include="Scripts\ui-bootstrap-tpls-0.10.0.js" />
     <Content Include="Scripts\ui-bootstrap-tpls-0.10.0.min.js" />
-    <Content Include="Web.config" />
+    <Content Include="Web.config">
+      <SubType>Designer</SubType>
+    </Content>
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="App_Start\SwaggerConfig.cs" />
     <Compile Include="App_Start\WebApiConfig.cs" />
     <Compile Include="Controllers\EventsController.cs" />
     <Compile Include="Controllers\UsersController.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
-    <Compile Include="Migrations\Configuration.cs" />
-    <Compile Include="Models\AppDbContext.cs" />
+    <Compile Include="Migrations\201612252250196_init-migration.cs" />
+    <Compile Include="Migrations\201612252250196_init-migration.Designer.cs">
+      <DependentUpon>201612252250196_init-migration.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201701012059435_create-date-migration.cs" />
+    <Compile Include="Migrations\201701012059435_create-date-migration.Designer.cs">
+      <DependentUpon>201701012059435_create-date-migration.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201701012111237_session-table.cs" />
+    <Compile Include="Migrations\201701012111237_session-table.Designer.cs">
+      <DependentUpon>201701012111237_session-table.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201701012154266_session-event.cs" />
+    <Compile Include="Migrations\201701012154266_session-event.Designer.cs">
+      <DependentUpon>201701012154266_session-event.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201701012159134_event-users.cs" />
+    <Compile Include="Migrations\201701012159134_event-users.Designer.cs">
+      <DependentUpon>201701012159134_event-users.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201701012203025_event-users-table.cs" />
+    <Compile Include="Migrations\201701012203025_event-users-table.Designer.cs">
+      <DependentUpon>201701012203025_event-users-table.cs</DependentUpon>
+    </Compile>
+    <Compile Include="DataAccess\Migrations\Configuration.cs" />
+    <Compile Include="Migrations\201701020626358_event-user-fix.cs" />
+    <Compile Include="Migrations\201701020626358_event-user-fix.Designer.cs">
+      <DependentUpon>201701020626358_event-user-fix.cs</DependentUpon>
+    </Compile>
+    <Compile Include="DataAccess\AppDbContext.cs" />
     <Compile Include="Models\BaseEntity.cs" />
     <Compile Include="Models\Event.cs" />
     <Compile Include="Models\EventUsers.cs" />
+    <Compile Include="Models\Session.cs" />
     <Compile Include="Models\User.cs" />
     <Compile Include="Models\UsersListModel.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
@@ -216,7 +261,29 @@
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
-    <Folder Include="DataAccess\" />
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="Migrations\201612252250196_init-migration.resx">
+      <DependentUpon>201612252250196_init-migration.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201701012059435_create-date-migration.resx">
+      <DependentUpon>201701012059435_create-date-migration.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201701012111237_session-table.resx">
+      <DependentUpon>201701012111237_session-table.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201701012154266_session-event.resx">
+      <DependentUpon>201701012154266_session-event.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201701012159134_event-users.resx">
+      <DependentUpon>201701012159134_event-users.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201701012203025_event-users-table.resx">
+      <DependentUpon>201701012203025_event-users-table.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201701020626358_event-user-fix.resx">
+      <DependentUpon>201701020626358_event-user-fix.cs</DependentUpon>
+    </EmbeddedResource>
   </ItemGroup>
   <PropertyGroup>
     <VisualStudioVersion Condition="'$(VisualStudioVersion)' == ''">10.0</VisualStudioVersion>
